@@ -1,13 +1,16 @@
-name: Github Actions DevOps course
-on: push
+name: ansible-lint
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
 jobs:
-  DevOps-Course-first-job:
-    runs-on: ubuntu-latest
+  build:
+    name: Ansible Lint
+    runs-on: ubuntu-24.04
     steps:
-      - run: echo "I run my first Github Actions"
-      - name: Show uptime
-        run: uptime
-      - name: Where am I?
-        run: pwd
-      - name: Who am I?
-        run: whoami
+      - uses: actions/checkout@v4
+      - name: Run ansible-lint
+        uses: ansible/ansible-lint@main
+EOF
